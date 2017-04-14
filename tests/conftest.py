@@ -6,7 +6,7 @@ import pytest
 from _pytest.config import Parser
 from _pytest.python import Metafunc
 
-from lovelace.services.data_access.service import query_wikipedia_api
+from lovelace.services.data_access.wikipedia import query_wikipedia_api
 
 base_dir = os.path.dirname(__file__)
 sys.path.append(base_dir)
