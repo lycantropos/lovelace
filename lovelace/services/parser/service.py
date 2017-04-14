@@ -1,20 +1,14 @@
-from typing import (Iterator,
-                    List)
+from typing import Iterator
 
 from lovelace.utils import lines_generator
 
 
 def parse_page_sections_names(content: str
-                              ) -> List[str]:
+                              ) -> Iterator[str]:
     content_lines = lines_generator(content)
     sections_lines = filter(is_section_line, content_lines)
-    return [line.strip(' =') for line in sections_lines]
-
-
-def is_section_line(line: str) -> bool:
-    section_line_head, section_line_tail = '== ', ' =='
-    return (line.startswith(section_line_head) and
-            line.endswith(section_line_tail))
+    for line in sections_lines:
+        yield line.strip(' =')
 
 
 def parse_page_section_content_lines(section_name: str,
@@ -28,3 +22,9 @@ def parse_page_section_content_lines(section_name: str,
         if line_is_section:
             return
         yield line
+
+
+def is_section_line(line: str) -> bool:
+    section_line_head, section_line_tail = '== ', ' =='
+    return (line.startswith(section_line_head) and
+            line.endswith(section_line_tail))

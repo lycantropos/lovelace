@@ -8,9 +8,9 @@ import requests
 
 from lovelace.config import API_URL
 from lovelace.utils import join_str
-from lovelace.services.parser.utils import (wrap_query_errors,
-                                            get_page_id,
-                                            get_title)
+from .utils import (wrap_query_errors,
+                    get_page_id,
+                    get_title)
 
 
 def query_wikipedia_api(**params: Dict[str, str]
