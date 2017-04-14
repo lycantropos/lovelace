@@ -1,0 +1,17 @@
+# Python
+__pycache__
+*.pyc
+.eggs
+*.egg-info
+
+# IntelliJ Idea
+.idea
+
+# Docker
+Dockerfile
+.dockerignore
+
+# tests
+.hypothesis/
+.coverage
+result.xml

@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  lovelace:
+    build: .
+    image: lycantropos/lovelace:latest
+    volumes:
+      - ./:/lovelace/
+    entrypoint: python3
+    command: setup.py test
+    extra_hosts:
+      - "dockerhost:$DOCKERHOST"  # for debugging
