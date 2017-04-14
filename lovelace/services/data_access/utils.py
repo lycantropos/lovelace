@@ -1,5 +1,8 @@
 from contextlib import contextmanager
-from typing import Tuple, Dict, Any, Optional
+from typing import (Any,
+                    Optional,
+                    Dict,
+                    Tuple)
 
 from lovelace.utils import join_str
 
