@@ -4,7 +4,7 @@ from setuptools import (setup,
 from lovelace.config import PACKAGE
 
 setup(name=PACKAGE,
-      version='0.0.0',
+      version='0.0.1',
       packages=find_packages(),
       install_requires=[
           'aiohttp>=1.3.3',
