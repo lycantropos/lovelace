@@ -11,7 +11,7 @@ setup(name=PACKAGE,
       author_email='azatibrakov@gmail.com',
       url='https://github.com/lycantropos/lovelace',
       download_url='https://github.com/lycantropos/lovelace/archive/master.tar.gz',
-      keywords=['async', 'wikipedia', 'wikipedia api'],
+      keywords='async wikipedia api',
       install_requires=[
           'aiohttp>=1.3.3',
       ],
