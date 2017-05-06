@@ -1,4 +1,7 @@
+from asyncio import AbstractEventLoop
+
 import pytest
+from aiohttp import ClientSession
 
 from lovelace.services.data_access import fetch_titles
 from tests.strategies import (pages_ids_strategy,
@@ -17,8 +20,13 @@ def invalid_page_id() -> str:
 
 
 @pytest.fixture(scope='function')
-def title(page_id: str) -> str:
-    res, = fetch_titles(page_id)
+def title(page_id: str,
+          client_session: ClientSession,
+          event_loop: AbstractEventLoop) -> str:
+    resp = event_loop.run_until_complete(fetch_titles(page_id,
+                                                      session=client_session))
+    res, = resp
+    # "None" is a valid page title
     return str(res)
 
 

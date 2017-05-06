@@ -1,10 +1,14 @@
 import os
 import pkgutil
 import sys
+from asyncio import AbstractEventLoop, get_event_loop
+from contextlib import closing
+from typing import Generator
 
 import pytest
 from _pytest.config import Parser
 from _pytest.python import Metafunc
+from aiohttp import ClientSession
 
 from lovelace.services.data_access.wikipedia import query_wikipedia_api
 
@@ -35,7 +39,18 @@ def pytest_generate_tests(metafunc: Metafunc) -> None:
         metafunc.parametrize('tmp_ct', range(count))
 
 
+@pytest.fixture(scope='function')
+def client_session(event_loop: AbstractEventLoop
+                   ) -> Generator[ClientSession, None, None]:
+    res = ClientSession(loop=event_loop)
+    with closing(res):
+        yield res
+
+
 @pytest.fixture(scope='session',
                 autouse=True)
 def preparation() -> None:
-    query_wikipedia_api()
+    loop = get_event_loop()
+    session = ClientSession(loop=loop)
+    with closing(session):
+        loop.run_until_complete(query_wikipedia_api(session=session))

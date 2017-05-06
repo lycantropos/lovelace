@@ -1,14 +1,18 @@
-from typing import Dict, Any
+from typing import (Any,
+                    Dict)
 
-import requests
+from aiohttp import ClientSession
 
 from lovelace.config import API_URL
 
 
-def query_wikipedia_api(**params: Dict[str, str]
-                        ) -> Dict[str, Any]:
+async def query_wikipedia_api(*,
+                              session: ClientSession,
+                              **params: Dict[str, str]
+                              ) -> Dict[str, Any]:
     params['format'] = 'json'
     params['action'] = 'query'
-    response = requests.get(API_URL,
-                            params=params)
-    return response.json()
+    async with session.get(API_URL,
+                           params=params) as response:
+        response_json = await response.json()
+        return response_json

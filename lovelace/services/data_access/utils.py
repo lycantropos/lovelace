@@ -14,8 +14,10 @@ def wrap_query_errors(
     try:
         yield
     except errors as err:
-        kwargs_str = join_str(f'{key} {join_str(value)}'
-                              for key, value in kwargs.items())
+        kwargs = {key: join_str(f'"{value}"' for value in values)
+                  for key, values in kwargs.items()}
+        kwargs_str = join_str(f'{key} {values_str}'
+                              for key, values_str in kwargs.items())
         err_msg = (f'Error while querying pages '
                    f'with {kwargs_str}.')
         raise IOError(err_msg) from err

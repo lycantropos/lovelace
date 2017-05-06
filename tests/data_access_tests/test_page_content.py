@@ -1,11 +1,17 @@
 import re
 import string
 
+import pytest
+from aiohttp import ClientSession
+
 from lovelace.services.data_access import fetch_pages_contents
 
 
-def test_fetch_page_content(page_id: str) -> None:
-    page_content, = fetch_pages_contents(page_id)
+@pytest.mark.asyncio
+async def test_fetch_page_content(page_id: str,
+                                  client_session: ClientSession) -> None:
+    page_content, = await fetch_pages_contents(page_id,
+                                               session=client_session)
 
     if not page_content:
         return
