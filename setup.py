@@ -4,7 +4,7 @@ from setuptools import (setup,
 from lovelace.config import PACKAGE
 
 setup(name=PACKAGE,
-      version='0.0.1',
+      version='0.0.2',
       packages=find_packages(),
       description='Library for asynchronous working with Wikipedia API.',
       author='Azat Ibrakov',
