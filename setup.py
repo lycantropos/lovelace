@@ -5,7 +5,7 @@ from lovelace.config import PROJECT_NAME
 
 project_base_url = 'https://github.com/lycantropos/lovelace/'
 setup(name=PROJECT_NAME,
-      version='0.0.3',
+      version='0.0.4',
       packages=find_packages(exclude=('tests',)),
       description='Library for asynchronous working with Wikipedia API.',
       author='Azat Ibrakov',
