@@ -6,6 +6,8 @@ services:
     image: lycantropos/lovelace:latest
     volumes:
       - ./:/lovelace/
+    environment:
+      - Wikipedia.API.URL=https://en.wikipedia.org/w/api.php
     entrypoint: python3
     command: setup.py test
     extra_hosts:
